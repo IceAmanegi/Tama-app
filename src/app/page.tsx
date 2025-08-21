@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Drawermenu from "./component/Drawermenu/Drawermenu";
 import Articles from "./component/Articles/Articles";
 

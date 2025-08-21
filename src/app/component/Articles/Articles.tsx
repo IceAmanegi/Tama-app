@@ -9,7 +9,7 @@ interface Article {
   id: number;
   title: string;
   category: Category;
-  image: string;  // imageUrlをimageに変更
+  image: string;  // base64エンコードされた画像データ
   content: string;
   tag: string;
   date: string;
@@ -20,6 +20,13 @@ interface ArticlesProps {
 }
 
 export default function Articles({ articles }: ArticlesProps) {
+  // Base64画像URLを作成する関数
+  const getImageUrl = (base64String: string) => {
+    if (!base64String) return null;
+    // base64文字列からデータURLを作成
+    return `data:image/jpeg;base64,${base64String}`;
+  };
+
   // APIデータがない場合はサンプルデータを使用
   const displayArticles = articles.length > 0 ? articles : [
     {
@@ -73,10 +80,11 @@ export default function Articles({ articles }: ArticlesProps) {
             <div className="article-image-wrapper">
               {article.image ? (
                 <Image
-                  src={article.image}
+                  src={getImageUrl(article.image) || '/placeholder.jpg'}
                   alt={article.title}
                   fill
                   className="article-image"
+                  unoptimized  // base64画像の場合は最適化をスキップ
                 />
               ) : (
                 <div className="article-image-placeholder" />
