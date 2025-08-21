@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Drawermenu from "./component/Drawermenu";
+import Articles from "./component/Articles";
 
 export default async function Home() {
   try {
@@ -11,10 +12,10 @@ export default async function Home() {
     
     const data = await res.json();
     const blog = data?.posts || [];
-    console.log(blog);
 
     return (
       <div>
+        <Articles articles={blog} />
         <Drawermenu />
       </div>
     );
@@ -22,6 +23,7 @@ export default async function Home() {
     console.error('Error fetching blog data:', error);
     return (
       <div>
+        <Articles articles={[]} />
         <p>データの読み込み中にエラーが発生しました。</p>
         <Drawermenu />
       </div>
