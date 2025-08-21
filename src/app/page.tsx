@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Drawermenu from "./component/Drawermenu";
-import Articles from "./component/Articles";
+import Drawermenu from "./component/Drawermenu/Drawermenu";
+import Articles from "./component/Articles/Articles";
 
 export default async function Home() {
   try {

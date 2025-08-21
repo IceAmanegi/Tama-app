@@ -2,8 +2,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Category } from '../data/categories';
-import styles from './Articles.module.css';
+import { Category } from '../../assets/data/categories';
+import './Articles.css';
 
 interface Article {
   id: number;
@@ -19,7 +19,7 @@ interface ArticlesProps {
   articles: Article[];
 }
 
-export default function Articles({ articles = [] }: ArticlesProps) {
+export default function Articles({ articles }: ArticlesProps) {
   // APIデータがない場合はサンプルデータを使用
   const displayArticles = articles.length > 0 ? articles : [
     {
@@ -61,34 +61,34 @@ export default function Articles({ articles = [] }: ArticlesProps) {
   ];
 
   return (
-    <div className={styles['articles-section']}>
-      <div className={styles['articles-header']}>
-        <h1 className={styles['main-title']}>たまっぷ</h1>
-        <h2 className={styles['sub-title']}>Pick Up</h2>
+    <div className="articles-section">
+      <div className="articles-header">
+        <h1 className="main-title">たまっぷ</h1>
+        <h2 className="sub-title">Pick Up</h2>
       </div>
       
-      <div className={styles['articles-grid']}>
+      <div className="articles-grid">
         {displayArticles.map((article) => (
-          <Link href={`/articles/${article.id}`} key={article.id} className={styles['article-card']}>
-            <div className={styles['article-image-wrapper']}>
+          <Link href={`/articles/${article.id}`} key={article.id} className="article-card">
+            <div className="article-image-wrapper">
               {article.image ? (
                 <Image
                   src={article.image}
                   alt={article.title}
                   fill
-                  className={styles['article-image']}
+                  className="article-image"
                 />
               ) : (
-                <div className={styles['article-image-placeholder']} />
+                <div className="article-image-placeholder" />
               )}
             </div>
-            <div className={styles['article-info']}>
-              <div className={styles['tags-container']}>
-                <span className={styles['article-tag']}>{article.tag}</span>
-                <span className={styles['article-date']}>{article.date}</span>
+            <div className="article-info">
+              <div className="tags-container">
+                <span className="article-tag">{article.tag}</span>
+                <span className="article-date">{article.date}</span>
               </div>
-              <h3 className={styles['article-title']}>{article.title}</h3>
-              <p className={styles['article-content']}>{article.content}</p>
+              <h3 className="article-title">{article.title}</h3>
+              <p className="article-content">{article.content}</p>
             </div>
           </Link>
         ))}

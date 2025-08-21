@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import '../globals.css';
-import menuIcon from '../assets/logoSort.png';
-import { categories, Category } from '../data/categories';
+import '../../component/Drawermenu/Drawermenu.css';
+import menuIcon from '../assets/image/logoSort.png';
+import { categories, Category } from '../../assets/data/categories';
 
 export default function Drawermenu() {
   const [isOpen, setIsOpen] = useState(false);
