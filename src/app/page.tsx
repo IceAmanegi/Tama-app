@@ -1,22 +1,28 @@
-import Drawermenu from "./component/Drawermenu/Drawermenu";
-import Articles from "./component/Articles/Articles";
+import Drawermenu from './component/Drawermenu/Drawermenu';
+import Articles from './component/Articles/Articles';
 
 export default async function Home() {
   try {
-    const res = await fetch('https://admin-panel-delta-six.vercel.app/api/blog');
-    
+    const res = await fetch(
+      'https://admin-panel-delta-six.vercel.app/api/blog'
+    );
+
     if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
     }
-    
+
     const data = await res.json();
     const blog = data?.posts || [];
 
     return (
-      <div>
-        <Articles articles={blog} />
-        <Drawermenu />
-      </div>
+      <>
+        <div className='bgdesign'>
+          <div>
+            <Articles articles={blog} />
+            <Drawermenu />
+          </div>
+        </div>
+      </>
     );
   } catch (error) {
     console.error('Error fetching blog data:', error);
