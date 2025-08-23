@@ -12,6 +12,7 @@ async function getArticles() {
     }
     
     const data = await res.json();
+console.log (data.posts.body);
     return data?.posts || [];
   } catch (error) {
     console.error('Error fetching blog data:', error);

@@ -99,35 +99,81 @@
 /* メタ情報（日付とタグ）のコンテナ */
 .meta-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 両端に配置 */
   align-items: center;
   width: 100%;
-  padding-top: 0;
-  position: absolute; /* 位置を固定 */
-  bottom: 10px; /* 下からの位置 */
-  left: 10px; /* 左からの位置 */
-  right: 10px; /* 右からの位置 */
+  padding-top: 5px;
 }
 
-/* 日付のスタイル */
+/* 日付のスタイル（左側） */
 .article-date {
   display: block;
-  font-size: 12px; /* フォントサイズを大きく */
-  color: #333; /* 色を濃く */
+  font-size: 10px;
+  color: #666;
   font-family: 'Arial', sans-serif;
-  font-weight: 500; /* やや太く */
+  flex: 1; /* 左側のスペースを確保 */
+  text-align: left;
 }
 
-/* タグのスタイル */
+/* タグのスタイル（右側） */
 .article-tag {
-  padding: 3px 10px;
+  padding: 3px 15px;
   background-color: #ffffff;
+  border: 1px solid #cccccc;
   color: #333;
   border-radius: 20px;
-  font-size: 12px; /* フォントサイズを大きく */
+  font-size: 10px;
   text-align: center;
-  min-width: 6px;
-  border: 1px solid #cccccc;
+  min-width: 60px;
+  margin-left: auto; /* 右端に押し出す */
+  flex-shrink: 0; /* 縮小を防ぐ */
+}
+
+/* 記事詳細ページのヘッダーも調整 */
+/* filepath: c:\Users\IceAm\Documents\Coding\dev\tamaDesign-1\drawermenu\src\app\blog\[id]\ArticleDetail.css */
+
+.article-meta {
+  display: flex;
+  justify-content: space-between; /* 両端に配置 */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.article-category {
+  background: linear-gradient(135deg, #42D200, #36B000);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: auto; /* 左側に配置 */
+}
+
+.article-date {
+  color: #666;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  margin-left: auto; /* 右端に配置 */
+}
+
+/* タグがある場合の調整 */
+.article-tags {
+  display: flex;
+  justify-content: flex-end; /* 右端に配置 */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag {
+  background: #f8f9fa;
+  color: #495057;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  border: 1px solid #e9ecef;
 }
 
 /* タブレット以上のサイズ */
