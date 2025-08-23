@@ -2,6 +2,17 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #FFEACD;  /* アイボリーから薄いオレンジに変更 */
+}
+
+/* 追加：すべての要素のデフォルト背景を透明に */
+.articles-header,
+.main-title,
+.sub-title,
+.articles-grid,
+.meta-container,
+.article-date {
+  background-color: transparent !important;
 }
 
 /* ヘッダーのスタイリング */
@@ -11,158 +22,139 @@
 }
 
 .main-title {
-  font-size: 2rem;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 0.25rem;  /* 0.5remから0.25remに減少 */
-  color: #4CAF50;  /* 緑色に変更 */
+  margin-bottom: 12px;  /* マージンを12pxに変更 */
+  color: #42D200;  /* 緑色を変更 */
+  font-family: 'Inter', sans-serif;  /* Interフォントを適用 */
 }
 
 .sub-title {
-  font-size: 3.2rem;
-  color: #FF9800;  /* オレンジ色に変更 */
-  margin-top: 0;  /* 追加：上部の余白を削除 */
+  font-size: 36px;
+  color: #FF7801;  /* 色を変更 */
+  margin: 0;  /* 上下のマージンを削除 */
+  font-family: 'Yomogi', cursive;  /* Yomogiフォントを適用 */
 }
 
 /* グリッドレイアウト */
 .articles-grid {
   display: grid;
-  gap: 12px;  /* 間隔を少し縮めて */
-  padding: 12px;  /* パディングも調整 */
-  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 15px;
+  grid-template-columns: repeat(2, 192px); /* 固定サイズの列を設定 */
+  justify-content: center;
   margin: 0 auto;
-  max-width: 95vw;  /* 画面幅に対する最大幅を設定 */
-}
-
-/* タブレット以上のサイズ */
-@media screen and (min-width: 768px) {
-  .articles-grid {
-    gap: 15px;
-    padding: 15px;
-    grid-template-columns: repeat(2, 1fr);  /* タブレットでも2列に変更 */
-    max-width: 90vw;
-  }
-}
-
-/* デスクトップサイズ */
-@media screen and (min-width: 1024px) {
-  .articles-grid {
-    grid-template-columns: repeat(2, 1fr);  /* PCでも2列を維持 */
-    max-width: 85vw;
-  }
+  max-width: 420px;
 }
 
 /* 記事カードのスタイリング */
 .article-card {
-  background: white;
-  border-radius: 0;  /* 丸みを削除 */
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: inherit;
+  width: 192px;
+  height: 168px;
+  background-color: white;  /* 透明から白に変更 */
+  border-radius: 0px;     /* 角丸を追加 */
+  border: 1px solid #e0e0e0;  /* 枠線を追加 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);  /* 影を追加 */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border: 1px solid #eaeaea;
-  aspect-ratio: 4 / 3;  /* アスペクト比を調整 */
-  width: 100%;  /* 幅を最大に */
-  min-height: 180px;  /* 最小の高さを設定 */
-}
-
-.article-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;  /* 内容がはみ出ないように */
 }
 
 /* 画像関連のスタイリング */
 .article-image-wrapper {
+  width: 192px; /* 幅を固定 */
+  height: 112px; /* 高さを固定 */
   position: relative;
-  width: 100%;
-  padding-bottom: 55%;  /* 画像エリアをさらに大きく */
-  background-color: #f5f5f5;
   overflow: hidden;
 }
 
 .article-image {
   object-fit: cover;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 0.3s ease;
-}
-
-.article-card:hover .article-image {
-  transform: scale(1.05);
-}
-
-.article-image-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f0;
-  background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
-                    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+  width: 100% !important; /* 重要: 画像の幅を強制 */
+  height: 100% !important; /* 重要: 画像の高さを強制 */
 }
 
 /* 記事情報のスタイリング */
 .article-info {
-  padding: 0.75rem;
+  padding: 12px 10px; /* パディングを調整 */
   display: flex;
   flex-direction: column;
-  position: relative;
-  min-height: 60px;  /* 2行分の固定高さ */
+  height: 56px;
+  justify-content: space-between;
+  position: relative; /* 位置指定のため */
 }
 
 .article-title {
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin: 0 0 0.5rem 0;
-  color: #333;
-  white-space: nowrap;  /* 1行に収める */
-  overflow: hidden;
-  text-overflow: ellipsis;  /* はみ出した部分を ... で表示 */
+  font-size: 12px; /* フォントサイズを大きくする */
+  font-weight: bold;
+  margin: 0 0 15px 0; /* 下マージンを増やす */
+  line-height: 1.4;
+  text-align: left; /* 左揃えに変更 */
+  font-family: 'Inter', sans-serif; /* Interフォントを追加 */
 }
 
-/* article-content を非表示に */
-.article-content {
-  display: none;
-}
-
-/* タグと日付を含むコンテナ */
+/* メタ情報（日付とタグ）のコンテナ */
 .meta-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding-top: 0;
+  position: absolute; /* 位置を固定 */
+  bottom: 10px; /* 下からの位置 */
+  left: 10px; /* 左からの位置 */
+  right: 10px; /* 右からの位置 */
 }
 
+/* 日付のスタイル */
 .article-date {
-  position: static;  /* 絶対位置指定を解除 */
-  font-size: 11px;
-  color: #666;
+  display: block;
+  font-size: 12px; /* フォントサイズを大きく */
+  color: #333; /* 色を濃く */
   font-family: 'Arial', sans-serif;
-  letter-spacing: 0.5px;
+  font-weight: 500; /* やや太く */
 }
 
-.tags-container {
-  position: static;  /* 絶対位置指定を解除 */
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
-}
-
+/* タグのスタイル */
 .article-tag {
-  padding: 0.15rem 0.5rem;
-  background-color: #e6f3ff;
-  color: #0066cc;
+  padding: 3px 10px;
+  background-color: #ffffff;
+  color: #333;
   border-radius: 20px;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px; /* フォントサイズを大きく */
+  text-align: center;
+  min-width: 6px;
+  border: 1px solid #cccccc;
+}
+
+/* タブレット以上のサイズ */
+@media screen and (min-width: 768px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr); /* タブレットでも2列 */
+    max-width: 420px;
+  }
+}
+
+/* 大画面でも2列を維持 */
+@media screen and (min-width: 1024px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr); /* PCでも2列 */
+  }
+}
+
+/* レスポンシブ対応を調整 */
+@media screen and (max-width: 420px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, minmax(150px, 192px)); /* 小さい画面では最小幅を設定 */
+    gap: 10px;
+  }
+  
+  .article-card,
+  .article-image-wrapper {
+    width: 100%; /* 親要素に合わせる */
+    max-width: 192px; /* 最大幅は維持 */
+  }
 }

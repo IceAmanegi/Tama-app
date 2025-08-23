@@ -1,15 +1,16 @@
-/* リセットCSS */
-* {
-  box-sizing: border-box;
+/* 全体の背景色を設定 */
+html, body {
+  background-color: #FFEACD;
   margin: 0;
   padding: 0;
-}
-
-html,
-body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* リセットCSS */
+* {
+  box-sizing: border-box;
 }
 
 /* リンクのデフォルトスタイル */
