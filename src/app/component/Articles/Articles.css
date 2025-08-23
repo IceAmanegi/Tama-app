@@ -51,64 +51,73 @@
 .article-card {
   width: 192px;
   height: 168px;
-  background-color: white;  /* 透明から白に変更 */
-  border-radius: 0px;     /* 角丸を追加 */
-  border: 1px solid #e0e0e0;  /* 枠線を追加 */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);  /* 影を追加 */
+  background-color: white;
+  border-radius: 0; /* 角丸を除去 */
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-  overflow: hidden;  /* 内容がはみ出ないように */
+  overflow: hidden;
 }
 
 /* 画像関連のスタイリング */
 .article-image-wrapper {
-  width: 192px; /* 幅を固定 */
-  height: 112px; /* 高さを固定 */
+  width: 100%;
+  height: 112px;
   position: relative;
   overflow: hidden;
+  border-radius: 0; /* 画像の角丸も除去 */
 }
 
 .article-image {
-  object-fit: cover;
-  width: 100% !important; /* 重要: 画像の幅を強制 */
-  height: 100% !important; /* 重要: 画像の高さを強制 */
+  object-fit: cover; /* containからcoverに変更して横幅いっぱいに */
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #f8f9fa;
 }
 
-/* 記事情報のスタイリング */
-.article-info {
-  padding: 12px 10px; /* パディングを調整 */
-  display: flex;
-  flex-direction: column;
-  height: 56px;
-  justify-content: space-between;
-  position: relative; /* 位置指定のため */
-}
-
+/* 記事タイトルのスタイリング */
 .article-title {
-  font-size: 12px; /* フォントサイズを大きくする */
+  font-size: 10px; /* 12pxから10pxに縮小 */
   font-weight: bold;
-  margin: 0 0 15px 0; /* 下マージンを増やす */
-  line-height: 1.4;
-  text-align: left; /* 左揃えに変更 */
-  font-family: 'Inter', sans-serif; /* Interフォントを追加 */
+  margin: 0;
+  line-height: 1.2; /* 行の高さを調整 */
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap; /* 改行を禁止 */
+  overflow: hidden; /* はみ出した部分を隠す */
+  text-overflow: ellipsis; /* はみ出した部分を...で表示 */
+  width: 100%; /* 幅を100%に設定 */
+  max-width: 170px; /* 最大幅を設定（カードサイズに合わせて調整） */
 }
 
 /* メタ情報（日付とタグ）のコンテナ */
 .meta-container {
   display: flex;
-  justify-content: space-between; /* 両端に配置 */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 5px;
+  padding-top: 0; /* 上部パディングを0に変更 */
+  margin-top: 2px; /* 最小限のマージンのみ */
+}
+
+/* 記事情報のスタイリング */
+.article-info {
+  padding: 8px 10px; /* パディングを少し縮小 */
+  display: flex;
+  flex-direction: column;
+  height: 56px;
+  justify-content: flex-start;
+  gap: 4px; /* ギャップを少し増加 */
 }
 
 /* 日付のスタイル（左側） */
 .article-date {
   display: block;
-  font-size: 10px;
+  font-size: 1px; /* 10pxから8pxに変更 */
   color: #666;
   font-family: 'Arial', sans-serif;
   flex: 1; /* 左側のスペースを確保 */
@@ -124,13 +133,10 @@
   border-radius: 20px;
   font-size: 10px;
   text-align: center;
-  min-width: 60px;
+  min-width: 4px;
   margin-left: auto; /* 右端に押し出す */
   flex-shrink: 0; /* 縮小を防ぐ */
 }
-
-/* 記事詳細ページのヘッダーも調整 */
-/* filepath: c:\Users\IceAm\Documents\Coding\dev\tamaDesign-1\drawermenu\src\app\blog\[id]\ArticleDetail.css */
 
 .article-meta {
   display: flex;
