@@ -2,14 +2,13 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Category } from '../../assets/data/categories';
 import './Articles.css';
 
 interface Article {
   id: number;
   title: string;
-  category: Category;
-  image: string;  // base64エンコードされた画像データ
+  category: string;
+  src: string;  // srcフィールドから画像データを取得
   content: string;
   tag: string;
   date: string;
@@ -20,52 +19,23 @@ interface ArticlesProps {
 }
 
 export default function Articles({ articles }: ArticlesProps) {
-  // Base64画像URLを作成する関数
-  const getImageUrl = (base64String: string) => {
-    if (!base64String) return null;
-    // base64文字列からデータURLを作成
-    return `data:image/jpeg;base64,${base64String}`;
-  };
-
-  // APIデータがない場合はサンプルデータを使用
-  const displayArticles = articles.length > 0 ? articles : [
-    {
-      id: 1,
-      title: "多摩センターのカフェ",
-      category: "カフェ",
-      image: "/cafe.jpg",
-      content: "静かな環境で勉強できるカフェをご紹介",
-      tag: "おすすめ",
-      date: "2024.02.01"
-    },
-    {
-      id: 2,
-      title: "多摩の絶景スポット",
-      category: "絶景",
-      image: "/view.jpg",
-      content: "四季折々の美しい風景が楽しめるスポット",
-      tag: "絶景スポット",
-      date: "2024.02.02"
-    },
-    {
-      id: 3,
-      title: "おすすめグルメ",
-      category: "グルメ",
-      image: "/images/sample3.jpg",
-      content: "地元民に愛される絶品グルメを厳選して紹介",
-      tag: "グルメ",  // サンプルタグ
-      date: "2024.02.03"  // サンプル日付
-    },
-    {
-      id: 4,
-      title: "週末イベント",
-      category: "イベント",
-      image: "/images/sample4.jpg",
-      content: "家族で楽しめる週末限定のイベント情報",
-      tag: "イベント",  // サンプルタグ
-      date: "2024.02.04"  // サンプル日付
+  // Base64画像URLを作成する関数（srcフィールド用）
+  const getImageUrl = (srcString: string) => {
+    if (!srcString) return '/placeholder.jpg';
+    
+    try {
+      // すでにdata:image/部分が含まれている場合はそのまま返す
+      if (srcString.startsWith('data:image/')) {
+        return srcString;
+      }
+      
+      // Base64文字列にdata:image/jpeg;base64,プレフィックスを追加
+      return `data:image/jpeg;base64,${srcString}`;
+    } catch (error) {
+      console.error('画像のデコードエラー:', error);
+      return '/placeholder.jpg';
     }
-  ];
+  };
 
   return (
     <div className="articles-section">
@@ -75,28 +45,22 @@ export default function Articles({ articles }: ArticlesProps) {
       </div>
       
       <div className="articles-grid">
-        {displayArticles.map((article) => (
-          <Link href={`/articles/${article.id}`} key={article.id} className="article-card">
+        {articles.map((article) => (
+          <Link href={`/blog/${article.id}`} key={article.id} className="article-card">
             <div className="article-image-wrapper">
-              {article.image ? (
-                <Image
-                  src={getImageUrl(article.image) || '/placeholder.jpg'}
-                  alt={article.title}
-                  fill
-                  className="article-image"
-                  unoptimized  // base64画像の場合は最適化をスキップ
-                />
-              ) : (
-                <div className="article-image-placeholder" />
-              )}
+              <Image
+                src={getImageUrl(article.src)}  // srcフィールドを使用
+                alt={article.title}
+                fill
+                unoptimized
+                className="article-image"
+              />
             </div>
             <div className="article-info">
-              <div className="tags-container">
-                <span className="article-tag">{article.tag}</span>
-                <span className="article-date">{article.date}</span>
-              </div>
               <h3 className="article-title">{article.title}</h3>
-              <p className="article-content">{article.content}</p>
+              <div className="meta-container">
+                <span className="article-tag">{article.tag}</span>
+              </div>
             </div>
           </Link>
         ))}
