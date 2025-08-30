@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import '../../component/Drawermenu/Drawermenu.css';
-import menuIcon from '../assets/image/logoSort.png';
+import menuIcon from '../../assets/image/logoSort.png'; // パスを修正
 import { categories, Category } from '../../assets/data/categories';
 
 export default function Drawermenu() {
@@ -21,7 +21,7 @@ export default function Drawermenu() {
   return (
     <div className="App">
       <button className="circle-button" onClick={() => setIsOpen(true)}>
-        {/*  <img src={menuIcon}  alt="メニュー" />  */}
+        <img src={menuIcon.src} alt="メニュー" /> {/* .srcを追加してNext.jsの静的インポートに対応 */}
       </button>
       
       <div
@@ -39,7 +39,7 @@ export default function Drawermenu() {
           <div className="category-scroll">
             {categories.map((category, index) => (
               <button 
-                key={category} // indexをkeyとして使用するのを避ける
+                key={category}
                 className={`category-button ${selectedCategories.includes(category) ? 'selected' : ''}`}
                 onClick={() => toggleCategory(category)}
               >

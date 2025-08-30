@@ -1,47 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+
 .articles-section {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #FFEACD;  /* アイボリーから薄いオレンジに変更 */
+  background-color: transparent;
+  /* 背景画像の無限繰り返し設定 */
+  background-image: url('/path/to/your/background-image.jpg'); /* 背景画像のパスを指定 */
+  background-repeat: repeat; /* 縦横に繰り返し */
+  background-size: 200px 200px; /* 背景画像のサイズを調整 */
+  background-attachment: local; /* スクロールに合わせて移動 */
+  min-height: 100vh; /* 最小高さを画面の高さに設定 */
 }
 
-/* 追加：すべての要素のデフォルト背景を透明に */
+/* または、パターン画像を使用する場合 */
+.articles-section::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, rgba(255, 234, 205, 0.8) 2px, transparent 2px);
+  background-size: 30px 30px;
+  background-repeat: repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* CSS で作成するパターン背景（ドット模様） */
+.articles-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 120, 1, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(255, 120, 1, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 記事コンテンツを背景の上に表示 */
 .articles-header,
-.main-title,
-.sub-title,
-.articles-grid,
-.meta-container,
-.article-date {
-  background-color: transparent !important;
+.articles-grid {
+  position: relative;
+  z-index: 1;
 }
 
 /* ヘッダーのスタイリング */
 .articles-header {
   text-align: center;
-  margin-bottom: 2rem;  /* 3remから2remに減少 */
+  margin-bottom: 2rem;
 }
 
 .main-title {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 12px;  /* マージンを12pxに変更 */
-  color: #42D200;  /* 緑色を変更 */
-  font-family: 'Inter', sans-serif;  /* Interフォントを適用 */
+  margin-bottom: 12px;
+  color: #42D200;
+  font-family: 'Inter', sans-serif;
 }
 
 .sub-title {
   font-size: 36px;
-  color: #FF7801;  /* 色を変更 */
-  margin: 0;  /* 上下のマージンを削除 */
-  font-family: 'Yomogi', cursive;  /* Yomogiフォントを適用 */
+  color: #FF7801;
+  margin: 0;
+  font-family: 'Yomogi', cursive;
 }
 
-/* グリッドレイアウト */
+/* グリッドレイアウト - 2列固定 */
 .articles-grid {
   display: grid;
   gap: 15px;
   padding: 15px;
-  grid-template-columns: repeat(2, 192px); /* 固定サイズの列を設定 */
+  grid-template-columns: repeat(2, 192px);
   justify-content: center;
   margin: 0 auto;
   max-width: 420px;
@@ -52,7 +90,7 @@
   width: 192px;
   height: 168px;
   background-color: white;
-  border-radius: 0; /* 角丸を除去 */
+  border-radius: 0;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin: 0 auto;
@@ -61,6 +99,13 @@
   text-decoration: none;
   color: inherit;
   overflow: hidden;
+  position: relative;
+  z-index: 2; /* カードを背景の上に表示 */
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* 画像関連のスタイリング */
@@ -69,29 +114,38 @@
   height: 112px;
   position: relative;
   overflow: hidden;
-  border-radius: 0; /* 画像の角丸も除去 */
+  border-radius: 0;
 }
 
 .article-image {
-  object-fit: cover; /* containからcoverに変更して横幅いっぱいに */
+  object-fit: cover;
   width: 100% !important;
   height: 100% !important;
   background-color: #f8f9fa;
 }
 
-/* 記事タイトルのスタイリング */
+/* 記事情報のスタイリング */
+.article-info {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  height: 56px;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
 .article-title {
-  font-size: 10px; /* 12pxから10pxに縮小 */
+  font-size: 10px;
   font-weight: bold;
   margin: 0;
-  line-height: 1.2; /* 行の高さを調整 */
+  line-height: 1.2;
   text-align: left;
   font-family: 'Inter', sans-serif;
-  white-space: nowrap; /* 改行を禁止 */
-  overflow: hidden; /* はみ出した部分を隠す */
-  text-overflow: ellipsis; /* はみ出した部分を...で表示 */
-  width: 100%; /* 幅を100%に設定 */
-  max-width: 170px; /* 最大幅を設定（カードサイズに合わせて調整） */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 170px;
 }
 
 /* メタ情報（日付とタグ）のコンテナ */
@@ -100,31 +154,21 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 0; /* 上部パディングを0に変更 */
-  margin-top: 2px; /* 最小限のマージンのみ */
+  padding-top: 0;
+  margin-top: 2px;
 }
 
-/* 記事情報のスタイリング */
-.article-info {
-  padding: 8px 10px; /* パディングを少し縮小 */
-  display: flex;
-  flex-direction: column;
-  height: 56px;
-  justify-content: flex-start;
-  gap: 4px; /* ギャップを少し増加 */
-}
-
-/* 日付のスタイル（左側） */
+/* 日付のスタイル */
 .article-date {
   display: block;
-  font-size: 1px; /* 10pxから8pxに変更 */
+  font-size: 8px;
   color: #666;
   font-family: 'Arial', sans-serif;
-  flex: 1; /* 左側のスペースを確保 */
+  flex: 1;
   text-align: left;
 }
 
-/* タグのスタイル（右側） */
+/* タグのスタイル */
 .article-tag {
   padding: 3px 15px;
   background-color: #ffffff;
@@ -133,80 +177,82 @@
   border-radius: 20px;
   font-size: 10px;
   text-align: center;
-  min-width: 4px;
-  margin-left: auto; /* 右端に押し出す */
-  flex-shrink: 0; /* 縮小を防ぐ */
+  min-width: 60px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
-.article-meta {
-  display: flex;
-  justify-content: space-between; /* 両端に配置 */
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.article-category {
-  background: linear-gradient(135deg, #42D200, #36B000);
-  color: white;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-right: auto; /* 左側に配置 */
-}
-
-.article-date {
-  color: #666;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  margin-left: auto; /* 右端に配置 */
-}
-
-/* タグがある場合の調整 */
-.article-tags {
-  display: flex;
-  justify-content: flex-end; /* 右端に配置 */
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.tag {
-  background: #f8f9fa;
-  color: #495057;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  border: 1px solid #e9ecef;
-}
-
-/* タブレット以上のサイズ */
-@media screen and (min-width: 768px) {
-  .articles-grid {
-    grid-template-columns: repeat(2, 1fr); /* タブレットでも2列 */
-    max-width: 420px;
-  }
-}
-
-/* 大画面でも2列を維持 */
-@media screen and (min-width: 1024px) {
-  .articles-grid {
-    grid-template-columns: repeat(2, 1fr); /* PCでも2列 */
-  }
-}
-
-/* レスポンシブ対応を調整 */
+/* レスポンシブ対応 */
 @media screen and (max-width: 420px) {
-  .articles-grid {
-    grid-template-columns: repeat(2, minmax(150px, 192px)); /* 小さい画面では最小幅を設定 */
-    gap: 10px;
+  .articles-section {
+    padding: 1rem;
   }
   
-  .article-card,
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 8px;
+    max-width: 100%;
+  }
+  
+  .article-card {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 192/168;
+  }
+  
   .article-image-wrapper {
-    width: 100%; /* 親要素に合わせる */
-    max-width: 192px; /* 最大幅は維持 */
+    width: 100%;
+    height: 0;
+    padding-bottom: 58.33%;
+    position: relative;
+  }
+  
+  .article-info {
+    height: auto;
+    padding: 6px 8px;
+    flex: 1;
+  }
+  
+  .article-title {
+    font-size: 9px;
+    max-width: none;
+  }
+  
+  .article-date {
+    font-size: 7px;
+  }
+  
+  .article-tag {
+    font-size: 8px;
+    padding: 2px 8px;
+    min-width: 30px;
+  }
+  
+  .articles-header {
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .articles-grid {
+    gap: 6px;
+    padding: 6px;
+  }
+  
+  .article-title {
+    font-size: 8px;
+  }
+  
+  .article-date {
+    font-size: 6px;
+  }
+  
+  .article-tag {
+    font-size: 7px;
+    padding: 1px 6px;
   }
 }

@@ -1,31 +1,37 @@
+import Drawermenu from './component/Drawermenu/Drawermenu';
 import Articles from './component/Articles/Articles';
 
-// 記事一覧を取得
-async function getArticles() {
+export default async function Home() {
   try {
-    const res = await fetch('https://admin-panel-delta-six.vercel.app/api/blog', {
-      next: { revalidate: 3600 } // 1時間ごとに再検証
-    });
-    
+    const res = await fetch(
+      'https://admin-panel-delta-six.vercel.app/api/blog'
+    );
+
     if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
     }
-    
+
     const data = await res.json();
-console.log (data.posts.body);
-    return data?.posts || [];
+    const blog = data?.posts || [];
+
+    return (
+      <>
+        <div className='bgdesign'>
+          <div>
+            <Articles articles={blog} />
+            <Drawermenu />
+          </div>
+        </div>
+      </>
+    );
   } catch (error) {
     console.error('Error fetching blog data:', error);
-    return [];
+    return (
+      <div>
+        <Articles articles={[]} />
+        <p>データの読み込み中にエラーが発生しました。</p>
+        <Drawermenu />
+      </div>
+    );
   }
-}
-
-export default async function Home() {
-  const articles = await getArticles();
-  
-  return (
-    <main>
-      <Articles articles={articles} />
-    </main>
-  );
 }
