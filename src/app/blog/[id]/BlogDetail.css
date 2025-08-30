@@ -102,7 +102,7 @@
   box-shadow: 0 3px 10px rgba(66, 210, 0, 0.3);
 }
 
-.article-date {
+.blog-date {
   color: #5f6368;
   font-size: 14px;
   font-family: 'Inter', sans-serif;
@@ -113,7 +113,7 @@
   padding: 8px 15px;
   background: white;
   border-radius: 20px;
-  border: 1px solid #dadce0;
+  border: 0px solid #dadce0;
 }
 
 .article-date::before {
